@@ -1,4 +1,4 @@
-# Binocular depth perception in Active Inference
+# Binocular depth estimation in Active Inference
 
 <p align="center">
   <img src="/reference/images/env.png">
