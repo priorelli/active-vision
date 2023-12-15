@@ -18,7 +18,7 @@ The simulation can be launched through *main.py*, either with the option `-m` fo
 
 Plots can be generated through *plot.py*, either with the option `-d` for the belief trajectories, or `-v` for generating a video of the simulation.
 
-The folder *reference/video/* contains a few videos about the applications described in the paper.
+The folder *reference/video/* contains a few videos about depth estimation and target fixation in both static and dynamic environments.
 
 The window is divided into three frames. The top frame shows the task from above, while the two bottom frames displays the visual observations from the perspective of the eyes. The red and orange circles correspond to the real and estimated target.
 
