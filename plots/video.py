@@ -119,15 +119,15 @@ def record_video(log, width):
         axs.scatter(*int_point_w_all[n - (n % c.n_steps): n + 1].T,
                     color='lightblue', linewidth=width + 2, zorder=2)
 
-    # start = time.time()
-    # ani = animation.FuncAnimation(fig, animate, n_t)
-    # writer = animation.writers['ffmpeg'](fps=500)
-    # ani.save('plots/video.mp4', writer=writer)
-    # print('\nTime elapsed:', time.time() - start)
+    start = time.time()
+    ani = animation.FuncAnimation(fig, animate, n_t)
+    writer = animation.writers['ffmpeg'](fps=500)
+    ani.save('plots/video.mp4', writer=writer)
+    print('\nTime elapsed:', time.time() - start)
 
-    for i in range(0, c.n_steps, c.n_cycle):
-        animate(i - 1 if i > 0 else i)
-        plt.savefig('plots/frame%d' % i)
+    # for i in range(0, c.n_steps, c.n_cycle):
+    #     animate(i - 1 if i > 0 else i)
+    #     plt.savefig('plots/frame%d' % i)
 
     # animate(100)#c.n_steps - 400)
     # plt.savefig('plots/frame%d' % 100)

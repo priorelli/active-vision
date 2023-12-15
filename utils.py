@@ -40,7 +40,10 @@ def get_sim_options():
     parser.add_argument('-r', '--reach',
                         action='store_true', help='Fixate target')
     parser.add_argument('-b', '--both',
-                        action='store_true', help='Estimate depth and fixate target')
+                        action='store_true', help='Estimate depth and '
+                                                  'fixate target')
+    parser.add_argument('-a', '--ask-params',
+                        action='store_true', help='Ask parameters')
 
     args = parser.parse_args()
     return args
@@ -73,10 +76,10 @@ def print_debug(step, mu, lkh, E_g, E_i):
     if c.debug:
         np.set_printoptions(precision=4, suppress=True)
 
-        names = ['Step', 'mu_ext', 'mu_int', 'mu_cam',
-                 'lkh_ext', 'lkh_int', 'lkh_prop',
+        names = ['Step', 'mu_abs', 'mu_theta', 'mu_cam',
+                 'lkh_abs', 'lkh_theta', 'lkh_prop',
                  'lkh_cam', 'e_cam', 'e_vis', 'e_mu_cam']
-        vars_ = [step, *mu, lkh['ext'], lkh['int'], lkh['prop'],
+        vars_ = [step, *mu, lkh['abs'], lkh['theta'], lkh['prop'],
                  lkh['cam'], E_g[0], E_g[1], E_i[2]]
 
         for name, var in zip(names, vars_):

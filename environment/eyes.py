@@ -9,15 +9,15 @@ class Eyes:
 
         self.lengths = np.array(c.eye_lengths)
 
-    # Get eye frame of reference
-    def get_eye(self, point, angles=None, lengths=None):
+    # Get relative frame of reference
+    def get_rel(self, point, angles=None, lengths=None):
         if angles is None:
             angles = self.angles
         if lengths is None:
             lengths = self.lengths
 
         point_hom = np.array([*point, 1])
-        eye_points = np.zeros((c.n_eyes, 2))
+        rel_points = np.zeros((c.n_eyes, 2))
 
         for i in range(c.n_eyes):
             # Vergence-accomodation
@@ -31,9 +31,9 @@ class Eyes:
                             [-sin, cos, -cos * lengths[i]],
                             [0, 0, 1]])
 
-            eye_points[i] = rel.dot(point_hom)[:2]
+            rel_points[i] = rel.dot(point_hom)[:2]
 
-        return eye_points
+        return rel_points
 
     # Get camera projection
     def get_cam(self, points, focal=c.focal):

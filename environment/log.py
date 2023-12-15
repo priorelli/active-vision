@@ -30,7 +30,7 @@ class Log:
         self.actions[trial, step] = agent.a
 
         self.angles[trial, step] = eyes.angles
-        est_angles = utils.denormalize(agent.mu_int[0], c.norm_polar)
+        est_angles = utils.denormalize(agent.mu_theta[0], c.norm_polar)
         self.est_angles[trial, step] = est_angles
 
         self.lengths[trial, step] = eyes.lengths
@@ -38,7 +38,7 @@ class Log:
         self.est_lengths[trial, step] = est_lengths
 
         self.pos[trial, step] = target_pos
-        est_pos = utils.denormalize(agent.mu_ext[0], c.norm_cart)
+        est_pos = utils.denormalize(agent.mu_abs[0], c.norm_cart)
         self.est_pos[trial, step] = est_pos
 
         self.cam[trial, step] = utils.denormalize(s_vis, c.norm_cart)

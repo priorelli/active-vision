@@ -19,10 +19,10 @@ def plot_dynamics(log, width):
 
     fig, axs = plt.subplots(3, figsize=(60, 30))
 
-    axs[0].set_title('Ext error')
+    axs[0].set_title('Absolute error')
     axs[0].plot(e_pos, lw=width)
 
-    axs[1].set_title('Cam error')
+    axs[1].set_title('Projection error')
     axs[1].plot(e_cam[:, 0], lw=width)
     axs[1].plot(e_cam[:, 1], lw=width)
 

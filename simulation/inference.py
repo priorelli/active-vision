@@ -18,7 +18,7 @@ class Inference(Window):
         self.agent.init_belief()
 
         if c.task == 'reach':
-            self.agent.mu_ext[0] = utils.normalize(
+            self.agent.mu_abs[0] = utils.normalize(
                 self.target_pos, c.norm_cart)
 
         # Initialize error tracking
@@ -36,7 +36,7 @@ class Inference(Window):
         # Update eyes
         self.eyes.update(action)
 
-        # Move objects
+        # Move target
         if c.context == 'dynamic':
             self.move_target()
 
@@ -54,7 +54,7 @@ class Inference(Window):
             self.reset_trial()
 
     def reset_trial(self):
-        self.success += self.task_done(self.agent.mu_ext[0],
+        self.success += self.task_done(self.agent.mu_abs[0],
                                        self.agent.mu_cam[0])
 
         # Simulation done
@@ -68,7 +68,7 @@ class Inference(Window):
             self.sample_target()
 
             if c.task == 'reach':
-                self.agent.mu_ext[0] = utils.normalize(
+                self.agent.mu_abs[0] = utils.normalize(
                     self.target_pos, c.norm_cart)
 
             self.step = 0

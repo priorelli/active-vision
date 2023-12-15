@@ -18,7 +18,7 @@ class ManualControl(Window):
         # Update eyes
         self.eyes.update(action)
 
-        # Update objects
+        # Update target
         if c.context == 'dynamic':
             self.move_target()
 

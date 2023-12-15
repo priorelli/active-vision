@@ -9,7 +9,7 @@ from environment.eyes import Eyes
 # Define window class
 class Window(pyglet.window.Window):
     def __init__(self):
-        super().__init__(c.width, c.height, 'Eyes',  vsync=False)
+        super().__init__(c.width, c.height, 'Active vision',  vsync=False)
         # Initialize arm
         self.eyes = Eyes()
 
@@ -154,12 +154,12 @@ class Window(pyglet.window.Window):
 
     # Get visual observation
     def get_visual_obs(self):
-        eye_points = self.eyes.get_eye(self.target_pos)
-        cam_points = self.eyes.get_cam(eye_points)
+        rel_points = self.eyes.get_rel(self.target_pos)
+        cam_points = self.eyes.get_cam(rel_points)
 
         #  Use nonuniform fovea resolution
         cam_noise = utils.add_gaussian_noise(
-            cam_points, np.exp(np.abs(cam_points) / 1.5) * c.w_v)
+            cam_points, np.exp(np.abs(cam_points) / 1.5) * c.w_vis)
 
         return utils.normalize(cam_noise, c.norm_cart)
 
@@ -185,9 +185,23 @@ class Window(pyglet.window.Window):
         else:
             self.target_pos = np.array(c.target_pos)
 
+        # Sample velocity
+        angle = np.random.rand() * 2 * np.pi
+        self.target_dir = np.array((np.cos(angle), np.sin(angle)))
+
+    # Move target
+    def move_target(self):
+        self.target_pos += c.target_vel * self.target_dir
+
+        # Bounce
+        if not c.focal * 5 < self.target_pos[0] < c.width:
+            self.target_dir = -self.target_dir
+        if not -c.height / 4 < self.target_pos[1] < c.height / 4:
+            self.target_dir = -self.target_dir
+
     # Check if trial is successful
-    def task_done(self, mu_ext, mu_cam):
-        mu_ext_denorm = utils.denormalize(mu_ext, c.norm_cart)
+    def task_done(self, mu_abs, mu_cam):
+        mu_ext_denorm = utils.denormalize(mu_abs, c.norm_cart)
         mu_cam_denorm = utils.denormalize(mu_cam, c.norm_cart)
 
         dist_infer = np.linalg.norm(self.target_pos - mu_ext_denorm)
