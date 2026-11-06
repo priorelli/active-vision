@@ -77,22 +77,22 @@ class Window(pyglet.window.Window):
     # Draw frame lines
     def draw_lines(self, objects):
         objects.add(Line(0, c.height / 2, c.width, c.height / 2,
-                         width=8, color=(0, 0, 0), batch=self.batch))
+                         thickness=8, color=(0, 0, 0), batch=self.batch))
         objects.add(Line(c.width / 2, 0, c.width / 2, c.height / 2,
-                         width=8, color=(0, 0, 0), batch=self.batch))
+                         thickness=8, color=(0, 0, 0), batch=self.batch))
 
         objects.add(Line(0, self.offset_main[1], c.width, self.offset_main[1],
-                         width=1, color=(0, 0, 0), batch=self.batch))
+                         thickness=1, color=(0, 0, 0), batch=self.batch))
         objects.add(Line(self.offset_main[0], c.height / 2,
                          self.offset_main[0], c.height,
-                         width=1, color=(0, 0, 0), batch=self.batch))
+                         thickness=1, color=(0, 0, 0), batch=self.batch))
 
         objects.add(Line(0, c.height / 4, c.width, c.height / 4,
-                         width=1, color=(0, 0, 0), batch=self.batch))
+                         thickness=1, color=(0, 0, 0), batch=self.batch))
         objects.add(Line(c.width / 4, 0, c.width / 4, c.height / 2,
-                         width=1, color=(0, 0, 0), batch=self.batch))
+                         thickness=1, color=(0, 0, 0), batch=self.batch))
         objects.add(Line(c.width * 3 / 4, 0, c.width * 3 / 4, c.height / 2,
-                         width=1, color=(0, 0, 0), batch=self.batch))
+                         thickness=1, color=(0, 0, 0), batch=self.batch))
 
         return objects
 

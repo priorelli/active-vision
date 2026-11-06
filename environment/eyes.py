@@ -44,7 +44,7 @@ class Eyes:
             cam = np.array([[1, 0, 0],
                             [0, focal, 0]])
 
-            cam_points[i] = cam.dot(point_hom[i])[1:]
+            cam_points[i] = cam.dot(point_hom[i])[1]
             cam_points[i] /= point_hom[i, 0]
 
         return cam_points
